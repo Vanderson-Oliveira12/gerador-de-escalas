@@ -103,10 +103,8 @@ function buildMeetingText(
   const grouped = new Map<string, string[]>();
 
   for (const assignment of meeting.assignments) {
-    const activity = activityMap.get(assignment.activityId);
     const participant = participantMap.get(assignment.participantId);
 
-    const activityName = activity?.name ?? "Atividade";
     const participantName = participant?.name ?? "Participante não encontrado";
 
     const names = grouped.get(assignment.activityId) ?? [];
@@ -214,11 +212,6 @@ export function DashboardPage() {
   const nextMeeting = useMemo(
     () => getMeetingForDate(data.schedules, nextThursday),
     [data.schedules, nextThursday],
-  );
-
-  const activityMap = useMemo(
-    () => new Map(data.activities.map((activity) => [activity.id, activity])),
-    [data.activities],
   );
 
   const participantMap = useMemo(
